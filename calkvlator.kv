@@ -2,37 +2,39 @@
 
 BoxLayout:
     orientation: "vertical"
-	display: display_input
+	display: display_output
 
 	ActionBar:
 		ActionView:
 			ActionPrevious:
-				title: 'Calkvlator'
-				with_previous: False
+				title: '素数判定'
+                with_previous: False
 
     TextInput:
-		id: display_input
+		id: display_output
 		size_hint_y: 1
-		font_name: 'Roboto'
 		font_size: 60
     Keyboard:
 		size_hint_y: 3.5
 
 
 <Keyboard@GridLayout>:
-	cols: 4
+	cols: 5
 	rows: 5
 	spacing: 2
 	padding: 4
 
 	ClearButton:
 		text: "C"
+	CodeButton:
+		text: "+/-"
 	OperatorButton:
-		text: "/"
-	OperatorButton:
-		text: "*"
+		text: "("
+    OperatorButton:
+        text: ")"
 	DelButton:
-		text: "<x"
+        text: "＜X"
+        
 
 	NumberButton:
 		text: "7"
@@ -41,7 +43,9 @@ BoxLayout:
 	NumberButton:
 		text: "9"
 	OperatorButton:
-		text: "-"
+		text: "+"
+    OperatorButton:
+        text: "-"
 
 	NumberButton:
 		text: "4"
@@ -50,7 +54,9 @@ BoxLayout:
 	NumberButton:
 		text: "6"
 	OperatorButton:
-		text: "+"
+		text: "*"
+    OperatorButton:
+        text: "/"
 
 	NumberButton:
 		text: "1"
@@ -58,21 +64,24 @@ BoxLayout:
 		text: "2"
 	NumberButton:
 		text: "3"
-	CalcButton:
-		text: "%"
+    OperatorButton:
+        text: "//"
+    OperatorButton:
+        text: "%"
 
 	NumberButton:
 		text: "0"
-	CalcButton:
-		text: "."
-	CalcButton:
-		text: "+/-"
-	EqualButton:
-		text: "="
-
-
+    NumberButton:
+        text: "."
+    EqualButton:
+        text: "="
+    ExponentialButton:
+        text: "指数"
+    PrimeButton:
+        text: "a/p"
+        
 <CalcButton@Button>:
-	font_size: 30
+	font_size: 60
 	background_normal: ''
 	background_down: ''
 	background_color: get_color_from_hex("#1F6982")
@@ -80,8 +89,7 @@ BoxLayout:
 	on_release: self.background_color = get_color_from_hex("#1F6982")
 
 <NumberButton@CalcButton>:
-	font: "Roboto"
-	font_size: 30
+	font_size: 60
 	bold: True
 	on_press: app.print_number(self.text)
 
@@ -93,6 +101,15 @@ BoxLayout:
 
 <DelButton@CalcButton>:
 	on_press: app.del_char()
+    
+<PrimeButton@CalcButton>:
+    on_press: app.prime_judge()
+
+<CodeButton@CalcButton>:
+    on_press: app.code_change()
+
+<ExponentialButton@CalcButton>:
+    on_press: app.exponential_notation()
 
 <EqualButton@CalcButton>:
 	on_press: app.calculate()
